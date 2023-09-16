@@ -1,3 +1,4 @@
+import 'package:bloc_app/main.dart';
 import 'package:bloc_app/pages/welcome/bloc/welcome_events.dart';
 import 'package:bloc_app/pages/welcome/bloc/welcome_states.dart';
 import 'package:bloc_app/pages/welcome/bloc/welocme_blocs.dart';
@@ -136,7 +137,10 @@ class _WelcomeState extends State<Welcome> {
                 duration: const Duration(milliseconds: 400),
                 curve: Curves.decelerate,
               );
-            } else {}
+            } else {
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("signIn", (route) => false);
+            }
           },
           child: Container(
             margin: EdgeInsets.only(
