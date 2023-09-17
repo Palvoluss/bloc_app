@@ -880,3 +880,4 @@ Temporary Items
 
 # Include any specific files here.
 assets/
+macos/Runner/GoogleService-Info.plist
