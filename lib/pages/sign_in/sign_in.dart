@@ -1,10 +1,12 @@
 import 'package:bloc_app/pages/sign_in/bloc/sign_in_blocs.dart';
 import 'package:bloc_app/pages/sign_in/bloc/sign_in_events.dart';
 import 'package:bloc_app/pages/sign_in/bloc/sign_in_states.dart';
-import 'package:bloc_app/pages/sign_in/widgets/sign_in_widget.dart';
+import 'package:bloc_app/pages/sign_in/sign_in_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../common_widget.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -23,7 +25,7 @@ class _SignInState extends State<SignIn> {
           child: SafeArea(
             child: Scaffold(
               backgroundColor: Colors.white,
-              appBar: buildAppBar(),
+              appBar: buildAppBar("sign in"),
               body: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,8 +69,12 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                     forgotPassword(),
-                    buildLogInAndRegButton("login", "login"),
-                    buildLogInAndRegButton("register", "register"),
+                    buildLogInAndRegButton("login", "login", () {
+                      SignInController(context: context).handleSigIn("email");
+                    }),
+                    buildLogInAndRegButton("sign up", "register", () {
+                      Navigator.of(context).pushNamed("register");
+                    }),
                   ],
                 ),
               ),
