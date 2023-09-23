@@ -1,4 +1,6 @@
+import 'package:bloc_app/common/values/constants.dart';
 import 'package:bloc_app/common/widgets/flutter_toast.dart';
+import 'package:bloc_app/global.dart';
 import 'package:bloc_app/pages/sign_in/bloc/sign_in_blocs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -31,8 +33,11 @@ class SignInController {
           );
           if (credential.user != null) {
             toastInfo(msg: "u do exist");
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil("/application", (route) => false);
+            Global.storageService
+                .setString(AppCostants.STORAGE_USER_TOKEN_KEY, "123");
+
+            // Navigator.of(context)
+            //     .pushNamedAndRemoveUntil("/application", (route) => false);
             return;
           }
           if (credential.user == null) {
