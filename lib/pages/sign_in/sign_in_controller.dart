@@ -31,6 +31,8 @@ class SignInController {
           );
           if (credential.user != null) {
             toastInfo(msg: "u do exist");
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil("/application", (route) => false);
             return;
           }
           if (credential.user == null) {

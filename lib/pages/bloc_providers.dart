@@ -16,7 +16,7 @@ class AppBlocProviders {
         ),
         BlocProvider(
           lazy: true,
-          create: (context) => RegisterBlocs(),
+          create: (context) => RegisterBloc(),
         )
       ];
 }

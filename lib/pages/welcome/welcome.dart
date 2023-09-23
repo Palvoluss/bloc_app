@@ -1,4 +1,6 @@
 import 'package:bloc_app/common/values/colors.dart';
+import 'package:bloc_app/common/values/constants.dart';
+import 'package:bloc_app/global.dart';
 import 'package:bloc_app/main.dart';
 import 'package:bloc_app/pages/welcome/bloc/welcome_events.dart';
 import 'package:bloc_app/pages/welcome/bloc/welcome_states.dart';
@@ -139,8 +141,10 @@ class _WelcomeState extends State<Welcome> {
                 curve: Curves.decelerate,
               );
             } else {
+              Global.storageService
+                  .setBool(AppCostants.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil("signIn", (route) => false);
+                  .pushNamedAndRemoveUntil("/sign_in", (route) => false);
             }
           },
           child: Container(

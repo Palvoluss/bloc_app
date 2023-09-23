@@ -73,7 +73,7 @@ class _SignInState extends State<SignIn> {
                       SignInController(context: context).handleSigIn("email");
                     }),
                     buildLogInAndRegButton("sign up", "register", () {
-                      Navigator.of(context).pushNamed("register");
+                      Navigator.of(context).pushNamed("/register");
                     }),
                   ],
                 ),

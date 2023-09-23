@@ -2,8 +2,8 @@ import 'package:bloc_app/pages/register/bloc/register_events.dart';
 import 'package:bloc_app/pages/register/bloc/register_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class RegisterBlocs extends Bloc<RegisterEvent, RegisterStates> {
-  RegisterBlocs() : super(const RegisterStates()) {
+class RegisterBloc extends Bloc<RegisterEvent, RegisterStates> {
+  RegisterBloc() : super(const RegisterStates()) {
     on<UserNameEvent>(_userNameEvent);
     on<EmailEvent>(_emailEvent);
     on<PasswordEvent>(_passwordEvent);

@@ -18,7 +18,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RegisterBlocs, RegisterStates>(
+    return BlocBuilder<RegisterBloc, RegisterStates>(
       builder: (context, state) {
         return Container(
           color: Colors.white,
@@ -50,21 +50,21 @@ class _RegisterState extends State<Register> {
                           reusableText("username"),
                           buildTextField("put ur username", "email", "user",
                               (value) {
-                            context.read<RegisterBlocs>().add(
+                            context.read<RegisterBloc>().add(
                                   UserNameEvent(value),
                                 );
                           }),
                           reusableText("email"),
                           buildTextField("put ur email", "email", "user",
                               (value) {
-                            context.read<RegisterBlocs>().add(
+                            context.read<RegisterBloc>().add(
                                   EmailEvent(value),
                                 );
                           }),
                           reusableText("password"),
                           buildTextField("put ur password", "password", "lock",
                               (value) {
-                            context.read<RegisterBlocs>().add(
+                            context.read<RegisterBloc>().add(
                                   PasswordEvent(value),
                                 );
                           }),
@@ -72,7 +72,7 @@ class _RegisterState extends State<Register> {
                           buildTextField(
                               "ensure u've put ur password", "password", "lock",
                               (value) {
-                            context.read<RegisterBlocs>().add(
+                            context.read<RegisterBloc>().add(
                                   RePasswordEvent(value),
                                 );
                           }),
