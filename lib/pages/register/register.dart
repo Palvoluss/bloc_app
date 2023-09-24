@@ -38,7 +38,7 @@ class _RegisterState extends State<Register> {
                     ),
                     Container(
                       margin: EdgeInsets.only(
-                        top: 66.h,
+                        top: 60.h,
                       ),
                       padding: EdgeInsets.only(
                         left: 25.w,
