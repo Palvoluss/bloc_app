@@ -1,5 +1,10 @@
 import 'package:bloc_app/common/values/colors.dart';
+import 'package:bloc_app/pages/home/bloc/home_page_blocs.dart';
+import 'package:bloc_app/pages/home/bloc/home_page_events.dart';
+import 'package:bloc_app/pages/home/bloc/home_page_states.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 AppBar buildAppBar() {
@@ -125,26 +130,179 @@ Widget searchView() {
   );
 }
 
-Widget sliderView() {
+Widget sliderView(BuildContext context, HomePageStates state) {
+  return Column(
+    children: [
+      Container(
+        margin: EdgeInsets.only(top: 20.h),
+        width: 325.w,
+        height: 160.h,
+        child: PageView(
+          onPageChanged: (value) {
+            context.read<HomePageBlocs>().add(HomePageDots(value));
+          },
+          children: [
+            _slidersContainer(path: "assets/icons/art.png"),
+            _slidersContainer(path: "assets/icons/image(3).png"),
+            _slidersContainer(path: "assets/icons/image(4).png"),
+          ],
+        ),
+      ),
+      Container(
+        child: DotsIndicator(
+          dotsCount: 3,
+          position: state.index.toInt(),
+          decorator: DotsDecorator(
+            color: AppColors.primaryThreeElementText,
+            activeColor: AppColors.primaryElement,
+            size: const Size.square(5.0),
+            activeSize: const Size(17.0, 5.0),
+            activeShape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+          ),
+        ),
+      )
+    ],
+  );
+}
+
+Widget _slidersContainer({String path = "assets/icons/art.png"}) {
+  return Container(
+    width: 325.w,
+    height: 160.h,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(20.h)),
+      image: DecorationImage(
+        fit: BoxFit.fill,
+        image: AssetImage(path),
+      ),
+    ),
+  );
+}
+
+Widget menuView() {
   return Column(
     children: [
       Container(
         width: 325.w,
-        height: 160.h,
-        child: PageView(
+        margin: EdgeInsets.only(top: 15.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              width: 325.w,
-              height: 160.h,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/icons/Art.png"),
-                ),
-              ),
-            )
+            _reusableText("choose one"),
+            GestureDetector(
+              child: _reusableText("see all",
+                  color: AppColors.primaryThreeElementText, fontSize: 10),
+            ),
           ],
         ),
       ),
+      Container(
+        margin: EdgeInsets.only(top: 20.w),
+        child: Row(
+          children: [
+            _reusableMenuText("all"),
+            _reusableMenuText(
+              "popular",
+              textColor: AppColors.primaryThreeElementText,
+              backgroundColor: Colors.white,
+            ),
+            _reusableMenuText(
+              "newest",
+              textColor: AppColors.primaryThreeElementText,
+              backgroundColor: Colors.white,
+            ),
+          ],
+        ),
+      )
     ],
+  );
+}
+
+Widget _reusableText(String text,
+    {Color color = AppColors.primaryText,
+    int fontSize = 16,
+    FontWeight fontWeight = FontWeight.bold}) {
+  return Container(
+    child: Text(
+      text,
+      style: TextStyle(
+        color: color,
+        fontSize: fontSize.sp,
+        fontWeight: fontWeight,
+      ),
+    ),
+  );
+}
+
+Widget _reusableMenuText(String menuText,
+    {Color textColor = AppColors.primaryElementText,
+    Color backgroundColor = AppColors.primaryElement}) {
+  return Container(
+    margin: EdgeInsets.only(right: 20.w),
+    decoration: BoxDecoration(
+      color: backgroundColor,
+      borderRadius: BorderRadius.circular(7.w),
+      border: Border.all(color: backgroundColor),
+    ),
+    padding: EdgeInsets.only(
+      left: 15.w,
+      right: 15.w,
+      top: 5.h,
+      bottom: 5.h,
+    ),
+    child: _reusableText(
+      menuText,
+      color: textColor,
+      fontWeight: FontWeight.normal,
+      fontSize: 12,
+    ),
+  );
+}
+
+Widget courseGrid() {
+  return Container(
+    padding: EdgeInsets.all(12.w),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(15.w),
+      image: const DecorationImage(
+        fit: BoxFit.fill,
+        image: AssetImage("assets/icons/image(3).png"),
+      ),
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "best course",
+          maxLines: 1,
+          overflow: TextOverflow.fade,
+          textAlign: TextAlign.left,
+          softWrap: false,
+          style: TextStyle(
+            color: AppColors.primaryElementText,
+            fontWeight: FontWeight.bold,
+            fontSize: 11.sp,
+          ),
+        ),
+        SizedBox(
+          height: 5.h,
+        ),
+        Text(
+          "best course for true",
+          maxLines: 1,
+          overflow: TextOverflow.fade,
+          textAlign: TextAlign.left,
+          softWrap: false,
+          style: TextStyle(
+            color: AppColors.primaryFourElementText,
+            fontWeight: FontWeight.normal,
+            fontSize: 8.sp,
+          ),
+        ),
+      ],
+    ),
   );
 }

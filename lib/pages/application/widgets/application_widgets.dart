@@ -1,4 +1,5 @@
 import 'package:bloc_app/pages/home/home_page.dart';
+import 'package:bloc_app/pages/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,9 +17,7 @@ Widget buildPage(int index) {
     Center(
       child: Text("chat"),
     ),
-    Center(
-      child: Text("profile"),
-    ),
+    const ProfilePage()
   ];
 
   return _widget[index];
